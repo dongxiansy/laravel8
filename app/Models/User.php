@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -71,11 +72,25 @@ class User extends Authenticatable
             ->orderBy('created_at', 'desc');
     }
 
+    /**
+     * 粉丝数量统计
+     *
+     * @return BelongsToMany
+     * @author xdong <dongxian@fanxiapp.com>
+     * @date   2021/7/28 18:17
+     */
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
     }
 
+    /**
+     * 关注人数统计
+     *
+     * @return BelongsToMany
+     * @author xdong <dongxian@fanxiapp.com>
+     * @date   2021/7/28 18:17
+     */
     public function followings()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
