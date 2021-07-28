@@ -81,6 +81,7 @@ class UsersController extends Controller
      */
     public function update(User $user, Request $request)
     {
+        // 编辑权限授权策略 验证当前用户编辑的是自己的信息
         $this->authorize('update', $user);
         $this->validate(
             $request,
@@ -96,9 +97,21 @@ class UsersController extends Controller
             $data['password'] = bcrypt($request->password);
         }
         $user->update($data);
-
         session()->flash('success', '个人资料更新成功！');
 
         return redirect()->route('users.show', $user);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(User $user)
+    {
+        // 删除授权策略 验证当前用户是管理员并且删除的用户不是自己
+        $this->authorize('destroy', $user);
+
+        $user->delete();
+        session()->flash('success', '成功删除用户！');
+        return back();
     }
 }
