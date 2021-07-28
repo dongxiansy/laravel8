@@ -43,3 +43,7 @@ Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy'
 
 // 用户数据资源
 Route::resource('users', 'UsersController');
+
+// 粉丝
+Route::get('/users/{user}/followings', 'UsersController@followings')->name('users.followings');
+Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
