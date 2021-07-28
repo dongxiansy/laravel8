@@ -38,9 +38,6 @@ class UsersController extends Controller
         return view('users.create');
     }
 
-    /**
-     * @throws AuthorizationException
-     */
     public function show(User $user)
     {
         $statuses = $user->statuses()
