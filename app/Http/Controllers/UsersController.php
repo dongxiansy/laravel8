@@ -20,6 +20,11 @@ class UsersController extends Controller
                 'except' => ['show', 'create', 'store', 'index', 'confirmEmail']
             ]
         );
+
+        // 1小时只能提交10次注册请求
+        $this->middleware('throttle:10,60', [
+            'only' => ['store']
+        ]);
     }
 
     public function index()
