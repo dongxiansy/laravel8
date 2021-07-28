@@ -96,6 +96,13 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
 
+    /**
+     * 关注
+     *
+     * @param $user_ids
+     * @author xdong <dongxian@fanxiapp.com>
+     * @date   2021/7/28 18:31
+     */
     public function follow($user_ids)
     {
         if ( ! is_array($user_ids)) {
@@ -104,6 +111,13 @@ class User extends Authenticatable
         $this->followings()->sync($user_ids, false);
     }
 
+    /**
+     * 取消关注
+     *
+     * @param $user_ids
+     * @author xdong <dongxian@fanxiapp.com>
+     * @date   2021/7/28 18:31
+     */
     public function unfollow($user_ids)
     {
         if ( ! is_array($user_ids)) {
