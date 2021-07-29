@@ -10,9 +10,16 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
+        "laravel/nova": "^3.14",
         "laravel/tinker": "^2.5",
         "overtrue/laravel-lang": "~4.0"
     },
+    "repositories": [
+        {
+            "type": "gitlab",
+            "url": "https://git.papamk.com/public-project/nova"
+        }
+    ],
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
