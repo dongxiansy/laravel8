@@ -4,10 +4,12 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class UserPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, HasRoles;
 
     /**
      * Create a new policy instance.
@@ -17,6 +19,33 @@ class UserPolicy
     public function __construct()
     {
         //
+    }
+
+    public function create()
+    {
+        if (Auth::check() && Auth::user()->can('manage_users')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function view()
+    {
+        if (Auth::check() && Auth::user()->can('manage_users')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function edit()
+    {
+        if (Auth::check() && Auth::user()->can('manage_users')) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -30,7 +59,17 @@ class UserPolicy
      */
     public function update(User $currentUser, User $user): bool
     {
+        if (Auth::check() && Auth::user()->can('manage_users')) {
+            return true;
+        }
+
         return $currentUser->id === $user->id;
+    }
+
+
+    public function delete(User $currentUser, User $user)
+    {
+        return Auth::user()->can('manage_users') && $user->hasRole('founder');
     }
 
     /**

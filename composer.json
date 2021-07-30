@@ -2,22 +2,37 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "acme/price-tracker": "*",
+        "bakerkretzmar/nova-settings-tool": "^1.1",
+        "beyondcode/nova-custom-dashboard-card": "^0.0.1",
+        "coroowicaksono/chart-js-integration": "^0.3.4",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
         "laravel/nova": "^3.14",
         "laravel/tinker": "^2.5",
-        "overtrue/laravel-lang": "~4.0"
+        "optimistdigital/nova-settings": "^3.2",
+        "overtrue/laravel-lang": "~4.0",
+        "spatie/laravel-permission": "^4.2",
+        "titasgailius/search-relations": "^2.0",
+        "vyuldashev/nova-permission": "^2.11"
     },
     "repositories": [
         {
             "type": "gitlab",
             "url": "https://git.papamk.com/public-project/nova"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/PriceTracker"
         }
     ],
     "require-dev": {
