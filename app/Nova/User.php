@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
@@ -61,9 +62,9 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 //            Storage::disk('public')->putFile($folder, $request->avatar),
-            Avatar::make('头像','avatar')
-                ->disk('public')
-                ->path("Avatar"),
+//            Avatar::make('头像', 'head_image')->disableDownload(),
+            Avatar::make('头像','head_image')
+                ->disk('public'),
 
             Text::make('用户名', 'name')
                 ->sortable()
@@ -84,21 +85,25 @@ class User extends Resource
                 ->sortable()
                 ->onlyOnIndex(),
 
-            MorphToMany::make('角色', 'roles', Role::class)->canSee(
-                function ($request) {
-                    return $request->user()->can('manage_users');
-                }
-            ),
-            MorphToMany::make('权限', 'permissions', Permission::class)->canSee(
-                function ($request) {
-                    return $request->user()->can('manage_users');
-                }
-            ),
-            RoleSelect::make('角色', 'roles')->canSee(
-                function ($request) {
-                    return $request->user()->can('manage_users');
-                }
-            ),
+            MorphToMany::make('角色', 'roles', Role::class),
+            MorphToMany::make('权限', 'permissions', Permission::class),
+            RoleSelect::make('角色', 'roles'),
+
+//            MorphToMany::make('角色', 'roles', Role::class)->canSee(
+//                function ($request) {
+//                    return $request->user()->can('manage_users');
+//                }
+//            ),
+//            MorphToMany::make('权限', 'permissions', Permission::class)->canSee(
+//                function ($request) {
+//                    return $request->user()->can('manage_users');
+//                }
+//            ),
+//            RoleSelect::make('角色', 'roles')->canSee(
+//                function ($request) {
+//                    return $request->user()->can('manage_users');
+//                }
+//            ),
         ];
     }
 

@@ -147,7 +147,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                         ],
                     ]
                 )
-                ->width('1'),
+                ->width('2/3'),
         ];
     }
 
